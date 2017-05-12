@@ -12,7 +12,11 @@
             <div class="card-body">
                 <table class="table table-striped table-bordered">
                     <tr>
+						<th>Category</th>
+						<th>Date Start</th>
+						<th>Date Stop</th>
 						<th>Product Id</th>
+						<th>Date Refrain</th>
 						<th>Product Name</th>
 						<th>Price Kid</th>
 						<th>Price Adult</th>
@@ -21,7 +25,11 @@
                     </tr>
                     <?php foreach($test_product as $t){ ?>
                     <tr>
+						<td><?php echo $t['category']; ?></td>
+						<td><?php echo $t['date_start']; ?></td>
+						<td><?php echo $t['date_stop']; ?></td>
 						<td><?php echo $t['product_id']; ?></td>
+						<td><?php echo $t['date_refrain']; ?></td>
 						<td><?php echo $t['product_name']; ?></td>
 						<td><?php echo $t['price_kid']; ?></td>
 						<td><?php echo $t['price_adult']; ?></td>

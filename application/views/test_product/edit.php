@@ -9,6 +9,31 @@
             <div class="card-body">
 				<?php echo validation_errors(); ?>
 				<?php echo form_open('test_product/edit/'.$test_product['product_id']); ?>
+				
+				</div>
+				<div class="row clearfix">
+				</div>
+				
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<label for="date_refrain" class="control-label">Date Refrain</label>
+						<div class="form-group">
+							<select name="date_refrain" class="form-control">
+								<option value="">select</option>
+								<?php 
+								$date_refrain_values = array(
+					);
+
+								foreach($date_refrain_values as $value => $display_text)
+								{
+									$selected = ($value == $test_product['date_refrain']) ? ' selected="selected"' : "";
+
+									echo '<option value="'.$value.'" '.$selected.'>'.$display_text.'</option>';
+								} 
+								?>
+							</select>
+						</div>
+					</div>
+				</div>
 				<div class="row clearfix">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 						<label for="product_name" class="control-label">Product Name</label>

@@ -9,7 +9,47 @@
             <div class="card-body">
                 <?php echo validation_errors(); ?>
 				<?php echo form_open('test_product/add'); ?>
-                <div class="row clearfix">
+                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<label for="category" class="control-label">Category</label>
+						<div class="form-group">
+							<input type="text" name="category" value="<?php echo $this->input->post('category'); ?>" class="form-control" id="category" />
+						</div>
+					</div>
+				</div>
+				<div class="row clearfix"><div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<label for="date_start" class="control-label">Date Start</label>
+						<div class="form-group">
+							<input type="text" name="date_start" value="<?php echo $this->input->post('date_start'); ?>" class="form-control" id="date_start" />
+						</div>
+					</div><div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<label for="date_stop" class="control-label">Date Stop</label>
+						<div class="form-group">
+							<input type="text" name="date_stop" value="<?php echo $this->input->post('date_stop'); ?>" class="form-control" id="date_stop" />
+						</div>
+					</div>
+				</div>
+				
+					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+						<label for="date_refrain" class="control-label">Date Refrain</label>
+						<div class="form-group">
+							<select name="date_refrain" class="form-control">
+								<option value="">select</option>
+								<?php 
+								$date_refrain_values = array(
+					);
+
+								foreach($date_refrain_values as $value => $display_text)
+								{
+									$selected = ($value == $this->input->post('date_refrain')) ? ' selected="selected"' : "";
+
+									echo '<option value="'.$value.'" '.$selected.'>'.$display_text.'</option>';
+								} 
+								?>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="row clearfix">
 					<div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
 						<label for="product_name" class="control-label">Product Name</label>
 						<div class="form-group">

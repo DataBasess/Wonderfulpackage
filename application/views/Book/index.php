@@ -10,22 +10,22 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
-			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-		<![endif]-->
-    
-</head>
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-<!--<script type="text/javascript" src=" <?php echo base_url(); ?>resources/jss/jquert-3.2.1.js "></script> -->
-
+    <!--
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> 
+    -->   
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/jquery-ui-1.12.1/jquery-ui.css">
+    <link rel="stylesheet" href="<?php echo base_url(); ?>assets/jquery-ui-1.12.1/jquery-ui.min.css">
+    <script src="<?php echo base_url(); ?>assets/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+    <script src="<?php echo base_url(); ?>assets/jquery-ui-1.12.1/jquery-ui.js"></script>
+    <script src="<?php echo base_url(); ?>assets/jquery-ui-1.12.1/jquery-ui.min.js"></script>
     <script >
-        
         $(document).ready(function() {
+
+
+
+            
+        
+
 
             $("#myTable").on('input', '.txtCal', function () {
                 var calculated_total_sum = 0;
@@ -73,9 +73,9 @@
 
             $( document ).on( "click", "#reset", function() {
 
-                $("#price_older").html(" ");
-                $("#price_adult").html(" ");
-                $("#price_kid").html(" ");
+                $("#price_older").html("0");
+                $("#price_adult").html("0");
+                $("#price_kid").html("0");
                 $("#price_older_cal").val("0");
                 $("#price_adult_cal").val("0");
                 $("#price_kid_cal").val("0");
@@ -84,8 +84,8 @@
                 $("#adult").val("0");
                 $("#kid").val("0");
                 //reset num
-                $("#total_sum_value").html(" ");
-                $("#total_ticket").val(" ");
+                $("#total_sum_value").html("0");
+                $("#total_ticket").val("0");
                 $("#show_total_price").html(" ");
                 $("#total_price").val(" ");
                 //reset total_price
@@ -104,6 +104,7 @@
                         type: 'POST',
                         dataType:"json",
                         success: function(data) {
+                            
                             //$('#id').val(data.id);
                             //$('#product_name').val(data.product_name);
                             $("#price_older").html(data.price_older);
@@ -119,6 +120,27 @@
                             $("#older").val("0");
                             $("#adult").val("0");
                             $("#kid").val("0");
+
+                            $("#total_sum_value").html("0");
+                            $("#total_ticket").val("0");
+                            $("#show_total_price").html(" ");
+                            $("#total_price").val(" ");
+                            //reset total_price
+                            $("#datepicker" ).datepicker({        
+                                                minDate: 2,
+                                                beforeShowDay: function(date){
+                                                var day = date.getDay();
+                                                //var month = date.getMonth();
+                                                //var currDate = data.getDate();
+                                                //ยังกำหนดวันที่ไม่ได้
+                                                if (day ==1 || day ==2) {
+                                                    return [false];
+                                                }else{
+                                                    return [true];
+                                                }
+                    
+                                        }        
+                            });
                             
 
 
@@ -142,6 +164,18 @@
         });//ready
     </script>
 
+    
+    
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+			<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.min.js"></script>
+			<script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+		<![endif]-->
+    
+</head>
 <body>
     <!-- container -->
     <div class="container">
@@ -150,25 +184,27 @@
 
                 <div class="trip-info-box">
                                        
-                    <form action="" method="POST" role="form" id="myTable">
+                    <form action="<?php echo base_url(); ?>Book/Reserved" method="POST"  role="form"  id="myTable">
 
                         <h3>จองแพ็คเกจท่องเที่ยว</h3>
                         
                         <div class="form-group">
                             <label for="">เลือกแพ็คเกจ</label>
                             <select class="form-control form-select ajax-processed" id="package" name="package">
-                            <option value="" selected="selected">กรุณาเลือกแพ๊คเกจ</option>
+                            <!--<option value="" selected="selected">กรุณาเลือกแพ๊คเกจ</option>
+                            -->
                             <?php foreach($test_product as $product){ ?>
                             <option value="<?php echo $product['product_id']; ?>" selected="selected"><?php echo $product['product_name']; ?></option>
                             <?php } ?>
                         </select>                        
                         </div>
+
                         
                         
                         <div class="form-group">
                             <label for="">วันที่ : </label>
                             <span class="glyphicon glyphicon-calendar" aria-hidden="true"></span></span>                            
-                            <input type="date" name="date" id="date" class="form-control" value="" required="required" title="">                            
+                            <input type="text" name="date" id="datepicker" class="form-control" value="" required="required" title="">                            
                             
                         </div>
 
@@ -191,18 +227,19 @@
 
                         <div class="form-group">
                             <label for="">จำนวนตั๋วรวม : <span id="total_sum_value"></span> </label>
-                            <input type="text" name="total_ticket" id="total_ticket" class="form-control" value="">
+                            <input type="hidden" name="total_ticket" id="total_ticket" class="form-control" value="">
                         </div>
                         <div class="form-group">
                             <label for="">ราคารวม : <span id="show_total_price"></span> </label>
-                            <input type="text" name="total_price" id="total_price" class="form-control" value="">
+                            <input type="hidden" name="total_price" id="total_price" class="form-control" value="">
                         </div>
 
 
 
 
-                        
+                        <!--
                         <a href="" class="btn btn-info" id="reset">Reset</a>
+                        -->
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </form>
 
@@ -219,6 +256,9 @@
 
     </div>
     <!-- container -->
+
+
+    
 
     
 </body>

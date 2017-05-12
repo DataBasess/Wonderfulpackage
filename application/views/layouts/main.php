@@ -18,6 +18,7 @@
         <!-- CSS App -->
         <link rel="stylesheet" type="text/css" href="<?php echo site_url('resources/css/style.css');?>">
         <link rel="stylesheet" type="text/css" href="<?php echo site_url('resources/css/flat-blue.css');?>">
+        
     </head>
 
     <body class="flat-blue">
@@ -144,6 +145,15 @@
                 </div>
             </footer>
         </div>
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/jquery-ui-1.12.1/jquery-ui.css">
+        <link rel="stylesheet" href="<?php echo base_url(); ?>assets/jquery-ui-1.12.1/jquery-ui.min.css">
+        <script src="<?php echo base_url(); ?>assets/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
+        <script src="<?php echo base_url(); ?>assets/jquery-ui-1.12.1/jquery-ui.js"></script>
+        <script src="<?php echo base_url(); ?>assets/jquery-ui-1.12.1/jquery-ui.min.js"></script>
+        <script >
+             $("#date_start" ).datepicker();
+             $("#date_stop" ).datepicker();
+        </script>
         <!-- Javascript Libs -->
         <script type="text/javascript" src="<?php echo site_url('resources/js/jquery.min.js');?>"></script>
         <script type="text/javascript" src="<?php echo site_url('resources/js/bootstrap.min.js');?>"></script>

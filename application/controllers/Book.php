@@ -22,6 +22,24 @@ class Book extends CI_Controller{
         $this->load->view('Book/index',$data);
     }
 
+    function Reserved()
+    {
+        
+        $ar=array(
+
+            "sesion_total_ticket"       =>$this->input->post('total_ticket'),
+            "sesion_date"               => $this->input->post('date'),
+            "sesion_total_price"        =>$this->input->post('total_price')
+
+        );
+        $this->session->set_userdata($ar);
+        
+        //$this->load->view('Book/Reserved');
+
+        $data['_view'] = 'Book/Reserved';
+        $this->load->view('layouts/main',$data);
+    }
+
     
     
 }
