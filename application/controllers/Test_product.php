@@ -26,15 +26,33 @@ class Test_product extends CI_Controller{
     {   
         // check if the test_product exists before trying to edit it
         //$data['test_product'] = $this->Test_product_model->get_test_product($product_id);
-        $Query = $this->db->query("SELECT * FROM test_product WHERE product_id= '$product_id'  ");
+        /*
+        $sql_pd = "SELECT p.*, c.name as cname, c.id as cid FROM products p ";
+        $sql_pd .= "INNER JOIN product_categories c ";
+        $sql_pd .= "ON p.product_categorie_id=c.id ";
+        $sql_pd .= "WHERE p.id=$id ";
+        */
+        //$Query = $this->db->query("SELECT * FROM test_product WHERE product_id= '$product_id'  ");
+
+
+        $Query = $this->db->query("SELECT p.*, d.* FROM test_product p INNER JOIN day_package d ON p.product_id = d.product_id WHERE p.product_id= '$product_id'  ");
         $row = $Query->row();
+
         if (isset($row)){
         
-        $ar=array(
-
+        
+        $ar=array(            
             "price_kid"    =>$row->price_kid,
             "price_adult"  =>$row->price_adult,
-            "price_older"  =>$row->price_older
+            "price_older"  =>$row->price_older,
+            "sunday"       =>$row->sunday,
+            "munday"       =>$row->munday,
+            "tuesday"      =>$row->tuesday,
+            "wednesday"    =>$row->wednesday,
+            "thursday"     =>$row->thursday,
+            "friday"       =>$row->friday,
+            "saturday"     =>$row->saturday,            
+            "date_stop"    =>$row->date_stop                    
 
             );
             echo json_encode($ar);
